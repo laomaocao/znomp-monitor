@@ -1,5 +1,5 @@
 module:
-redis: reuse znomp redis
+redis: reuse znomp redis database
 collector: get worker status from znomp api every INTERNAL seconds,store in coin:workeraddress(minername:hashrate string)
 front: show woker status by order group by worker address,generate html table 
 webserver: httpd daemon, generate html head and tail
