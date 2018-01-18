@@ -1,0 +1,21 @@
+<html><head>
+<style type="text/css">
+table, tr, td
+{
+border:1px solid blue;
+color:green
+} 
+tr.off td
+{
+border:1px solid blue;
+color:red
+}
+tr th
+{
+background-color:gray;
+color:white;
+}
+</style>
+<meta http-equiv="refresh" content="30">
+<title>simple monitor web interface </title></head>
+<body>
