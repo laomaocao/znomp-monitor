@@ -4,7 +4,7 @@ import os
 import time
 logfile='/home/chengang/.zcash/debug.log'
 notifycmd='/home/chengang/znomp/scripts/blocknotify 127.0.0.1:17117 zcash '
-height=0
+height=""
 blockhash=""
 
 f=open(logfile,'r')
@@ -15,12 +15,11 @@ while True:
 	while line:
 		if "UpdateTip" in line:
 			result=line.split(" ")
-                        newhash=result[4][5:]
-                        newheight=int(result[6][7:])
-			print "update new block, height=", newheight," new prehash=",newhash
-                        height=newheight
+                        blockhash=result[4][5:]
+                        height=result[6][7:]
+			print "update new block, height=", height," new prehash=",blockhash
                         print "blocknotify to pool"
-                        notifycmd=notifycmd+newhash
+                        notifycmd=notifycmd+blockhash
 			os.popen(notifycmd)
 		else:
 			print "no update in line, current height:", height	
