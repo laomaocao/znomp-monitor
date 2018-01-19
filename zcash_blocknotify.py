@@ -23,7 +23,7 @@ while True:
                         notifycmd=notifycmd+newhash
 			os.popen(notifycmd)
 		else:
-			print "no update in line, current height:", newheight	
+			print "no update in line, current height:", height	
 		line=f.read()
 	time.sleep(3)
 
