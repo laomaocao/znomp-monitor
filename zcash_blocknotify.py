@@ -9,20 +9,29 @@ blockhash=""
 
 f=open(logfile,'r')
 f.seek(0,2)
-#goto file end and star readline again and again to search UpdataTips
-while True:
-	line=f.read()
-	while line:
-		if "UpdateTip" in line:
-			result=line.split(" ")
-                        blockhash=result[4][5:]
-                        height=result[6][7:]
-			print "update new block, height=", height," new prehash=",blockhash
-                        print "blocknotify to pool"
-                        notifycmd=notifycmd+blockhash
-			os.popen(notifycmd)
-		else:
-			print "no update in line, current height:", height	
-		line=f.read()
-	time.sleep(3)
+try:
+	while True:
+		line=f.readline()
+		while line:
+			findstr=line.find("UpdateTip")
+			if findstr == 20:
+				print "found Updatetips at:",findstr
+				print "line lengh: " , len(line)
+				result=line.split(" ")
+                        	blockhash=result[4][5:]
+                        	height=result[6][7:]
+				blocktime=result[1]
+				print "At:",blocktime," update new block, height=", height," new hash=",blockhash
+                        	notifycmdtemp=notifycmd+blockhash
+				print "excute notify : ",notifycmdtemp
+				os.popen(notifycmdtemp)
+			else:
+				print line
+				print "no update in line, current height:", height	
+			line=f.readline()
+		time.sleep(3)
+except  KeyboardInterrupt:
+        print 'Shutting down by keyboarad'
+	f.close() 
+
 
